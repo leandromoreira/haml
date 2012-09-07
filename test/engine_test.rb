@@ -1393,6 +1393,11 @@ HAML
     assert_equal "<meta foo='2'>\n", render("%meta{:foo => 1 + 1}", :format => :html4)
   end
 
+  def test_hmtl_should_not_ignore_bolean_values_at_meta_tag
+    assert_equal "<meta name='blog' content='true'>\n", render("%meta{:name => 'blog', :content => true}", :format => :html4)
+    assert_equal "<meta name='blog' content='false'>\n", render("%meta{:name => 'blog', :content => false}", :format => :html4)
+  end
+
   def test_html_ignores_xml_prolog_declaration
     assert_equal "", render('!!! XML', :format => :html4)
   end
